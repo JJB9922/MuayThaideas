@@ -10,7 +10,6 @@ export default GetComboList = () => {
   const [currentCombo, setCurrentCombo] = useState(undefined);
 
   useEffect(() => {
-    const db = openDB();
     db.transaction(tx => {
       tx.executeSql('CREATE TABLE IF NOT EXISTS combos (id INTEGER PRIMARY KEY AUTOINCREMENT, combo TEXT, level TEXT)');
     });
