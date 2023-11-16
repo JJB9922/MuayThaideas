@@ -1,13 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { homeStyle, UIStyle } from '../utils/styles';
-import Buttons from '../components/Button';
+import GetComboList from '../utils/database';
 
 
 export default function App() {
     return (
       <View style={homeStyle.container}>
-        <Text> Combo List </Text>
+        <GetComboList />
       </View>
     );
   }

@@ -92,5 +92,13 @@ export const UIStyle = StyleSheet.create({
 
     headerStyle: {
       backgroundColor: '#D9CAB3',
+    },
+
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'stretch',
+      justifyContent: 'space-between',
+      margin: 8
     }
 })
