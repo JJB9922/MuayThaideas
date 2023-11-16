@@ -66,12 +66,14 @@ export default GetComboList = () => {
     db.transaction(tx => {
       tx.executeSql('UPDATE combos SET combo = ? WHERE id = ?', [currentCombo, id],
         (txObj, resultSet) => {
-          if(resultSet.rowsAffected > 0){
-            let existingCombos = [...combos];
-            const indexToUpdate = existingCombos.findIndex(combo => combo.id === id);
-            existingCombos[indexToUpdate].combo = currentCombo;
-            setCombos(existingCombos);
-            setCurrentCombo(undefined);
+          if(currentCombo !== undefined){
+            if(resultSet.rowsAffected > 0){
+              let existingCombos = [...combos];
+              const indexToUpdate = existingCombos.findIndex(combo => combo.id === id);
+              existingCombos[indexToUpdate].combo = currentCombo;
+              setCombos(existingCombos);
+              setCurrentCombo(undefined);
+            }
           }
         },
         (txObj, error) => console.log(error)
