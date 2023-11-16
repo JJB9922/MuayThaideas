@@ -100,5 +100,10 @@ export const UIStyle = StyleSheet.create({
       alignSelf: 'stretch',
       justifyContent: 'space-between',
       margin: 8
+    },
+
+    scrollview: {
+      flex: 1,
+      marginHorizontal: 20,
     }
 })

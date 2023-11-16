@@ -1,27 +1,45 @@
 import * as SQLite from 'expo-sqlite';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput, Button, ScrollView, SafeAreaView } from 'react-native';
 import { useState, useEffect } from 'react';
 import { homeStyle, UIStyle } from './styles';
+import * as FileSystem from "expo-file-system";
+import {Asset} from "expo-asset";
+
+async function openDatabase() {
+  if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite")).exists) {
+    await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "SQLite");
+  }
+  await FileSystem.downloadAsync(
+    Asset.fromModule(require("../../assets/sqlite.db")).uri,
+    FileSystem.documentDirectory + "SQLite/sqlite.db"
+  );
+  return SQLite.openDatabase("sqlite.db","1.0");
+}
 
 export default GetComboList = () => {
-  const db = SQLite.openDatabase("ComboDatabase.db")
+  const db = openDatabase();
   const [isLoading, setIsLoading] = useState(true);
   const [combos, setCombos] = useState([]);
   const [currentCombo, setCurrentCombo] = useState(undefined);
 
   useEffect(() => {
+    openDatabase()
+    .then(db => 
     db.transaction(tx => {
       tx.executeSql('CREATE TABLE IF NOT EXISTS combos (id INTEGER PRIMARY KEY AUTOINCREMENT, combo TEXT, level TEXT)');
-    });
+    }));
 
+    openDatabase()
+    .then(db => 
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM combos', null,
         (txObj, resultSet) => setCombos(resultSet.rows._array),
         (txObj, error) => console.log(error)
       );
-    });
+    }));
 
     setIsLoading(false);
+    
   }, [])
 
   if(isLoading) {
@@ -33,6 +51,8 @@ export default GetComboList = () => {
   }
 
   const addCombo = () => {
+    openDatabase()
+    .then(db => 
     db.transaction(tx => {
       tx.executeSql('INSERT INTO combos (combo, level) values (?, ?)', [currentCombo, "User"],
         (txObj, resultSet) => {
@@ -45,10 +65,12 @@ export default GetComboList = () => {
         },
         (txObj, error) => console.log(error)
       );
-    });
+    }));
   }
 
   const deleteCombo = (id) => {
+    openDatabase()
+    .then(db => 
     db.transaction(tx => {
       tx.executeSql('DELETE FROM combos WHERE id = ?', [id],
         (txObj, resultSet) => {
@@ -59,10 +81,12 @@ export default GetComboList = () => {
         },
         (txObj, error) => console.log(error)
       )
-    })
+    }))
   }
 
   const updateCombo = (id) => {
+    openDatabase()
+    .then(db => 
     db.transaction(tx => {
       tx.executeSql('UPDATE combos SET combo = ? WHERE id = ?', [currentCombo, id],
         (txObj, resultSet) => {
@@ -78,7 +102,7 @@ export default GetComboList = () => {
         },
         (txObj, error) => console.log(error)
       )
-    })
+    }))
   }
 
   const showCombos = () => {
@@ -94,11 +118,13 @@ export default GetComboList = () => {
   };
 
   return(
-    <View style = {homeStyle.container}>
-      <TextInput value={currentCombo} placeholder='Input Combo...' onChangeText={setCurrentCombo}/>
-      <Button title='Add Combo' onPress ={addCombo} />
-      {showCombos()}
-    </View>
+    <SafeAreaView style = {homeStyle.container}>
+      <ScrollView style = {UIStyle.scrollview}>
+        <TextInput value={currentCombo} placeholder='Input Combo...' onChangeText={setCurrentCombo}/>
+        <Button title='Add Combo' onPress ={addCombo} />
+        {showCombos()}
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
