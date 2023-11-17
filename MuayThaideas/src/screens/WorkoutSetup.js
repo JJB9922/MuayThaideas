@@ -111,6 +111,10 @@ const WorkoutSettingsScreen = () => {
 
   return (
     <View style = {homeStyle.container}>
+      <View style={UIStyle.space}/>
+      <Text style = {UIStyle.mainHeaders}>CONFIGURE WORKOUT</Text>
+      <View style={UIStyle.space}/>
+      <View style={UIStyle.smallSpace}/>
       <Text style = {UIStyle.subHeaders}>Workout Time (minutes):</Text>
       <View style = {UIStyle.gridContainer}>
         <Buttons.BasicButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('workoutTime', 10)} />
@@ -170,8 +174,6 @@ const WorkoutSettingsScreen = () => {
       onValueChange={() => handleToggle('userToggle')} 
       trackColor={{true: '#BC8034', false: '#8C7A6B'}}
       thumbColor='#D9CAB3'/>
-
-      <View style = {UIStyle.space} />
 
       <Buttons.LargeGradientButton title="Start Workout" onPress={startWorkout} colour1={'#90323D'} colour2={'#5E0B15'}/>
     </View>

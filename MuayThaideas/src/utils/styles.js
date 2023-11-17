@@ -154,8 +154,11 @@ export const UIStyle = StyleSheet.create({
 
     LargeButton: {
       borderRadius: 8,
-      overflow: 'hidden',
-      width: '60%'
+      overflow: 'visible',
+      width: '60%',
+      height: '60%',
+      paddingVertical: 32,
+      paddingHorizontal: 10,
     },
 
     buttonGradient: {
@@ -174,7 +177,7 @@ export const UIStyle = StyleSheet.create({
     },
 
     buttonText: {
-      color: 'white',
+      color: '#D9CAB3',
       fontWeight: 'bold',
     },
 
