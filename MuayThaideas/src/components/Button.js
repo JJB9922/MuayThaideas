@@ -62,6 +62,21 @@ function GradientButton({ title, onPress, colour1, colour2 }){
   );
 };
 
+function LargeGradientButton({ title, onPress, colour1, colour2 }){
+  return (
+    <TouchableOpacity style={UIStyle.LargeButton} onPress={onPress}>
+      <LinearGradient
+        colors={[colour1, colour2]}
+        style={UIStyle.buttonGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      >
+        <Text style={UIStyle.buttonText}>{title}</Text>
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+};
+
 function BasicButton({ title, onPress }){
   return (
     <TouchableOpacity style={UIStyle.basicButton} onPress={onPress}>
@@ -70,6 +85,6 @@ function BasicButton({ title, onPress }){
   );
 };
 
- export default { MainNavButton, SecondaryNavButton, DeleteButton, GradientButton, BasicButton }; 
+ export default { MainNavButton, SecondaryNavButton, DeleteButton, GradientButton, BasicButton, LargeGradientButton }; 
   
   

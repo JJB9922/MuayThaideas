@@ -6,7 +6,7 @@ import { UIStyle } from '../utils/styles';
 import HomeScreen from '../screens/HomeScreen';
 import ComboListScreen from '../screens/ComboList';
 import FighterDetailsScreen from '../screens/FighterDetails';
-import WorkoutScreen from '../screens/Workout';
+import WorkoutSetupScreen from '../screens/WorkoutSetup';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +22,7 @@ const AppNavigator = () => {
                                                                     headerStyle: UIStyle.headerStyle}}/>
         
         <Stack.Screen name="FighterDetails" component={FighterDetailsScreen} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
-        <Stack.Screen name="Workout" component={WorkoutScreen} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
+        <Stack.Screen name="Workout" component={WorkoutSetupScreen} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -13,7 +13,7 @@ export const homeStyle = StyleSheet.create({
         height: "100%",
         backgroundColor: '#D9CAB3',
         alignItems: 'center',
-        overflow: "scroll"
+        overflow: "visible",
     },
   });
 
@@ -25,12 +25,21 @@ export const UIStyle = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    shadow: {
+      shadowColor: 'rgba(0, 0, 0, 0.1)',
+      shadowOpacity: 0.8,
+      elevation: 6,
+      shadowRadius: 10, 
+      shadowOffset: { width: 0, height: 5 }, 
+    },
+
     mainButton: {
+        overflow: "visible",
         width: "80%",
         paddingVertical: 32,
         paddingHorizontal: 10,
         borderRadius: 8,
-        backgroundColor: '#5E0B15',
+        backgroundColor: "#5E0B15",
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
@@ -85,8 +94,27 @@ export const UIStyle = StyleSheet.create({
       textShadowRadius: 2,
     },
 
+    subHeaders: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      letterSpacing: 0.25,
+      textAlign: 'center',
+      color: '#333',
+      textShadowColor: 'rgba(0, 0, 0, 0.1)',
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 2,
+      elevation: 3
+    },
+
+
     space:{
         height: 20,
+        width: 20,
+    },
+
+    smallSpace:{
+      height: 5,
+      width: 5
     },
 
     headerStyle: {
@@ -124,6 +152,12 @@ export const UIStyle = StyleSheet.create({
       overflow: 'hidden',
     },
 
+    LargeButton: {
+      borderRadius: 8,
+      overflow: 'hidden',
+      width: '60%'
+    },
+
     buttonGradient: {
       paddingVertical: 10,
       paddingHorizontal: 20,
@@ -148,6 +182,18 @@ export const UIStyle = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+    },
+
+    gridContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      padding: 16, // Add padding or adjust as needed
+    },
+
+    gridItem: {
+      width: '30%', // Adjust the width based on your preference
+      paddingHorizontal: 8,
     },
 
     element: {
