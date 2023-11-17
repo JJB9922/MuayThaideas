@@ -12,9 +12,10 @@ const WorkoutSettingsScreen = () => {
   const [userToggle, setUserToggle] = useState(false);
 
   const handleWorkoutTimeChange = (text) => {
-    const enteredValue = parseInt(text, 10);
-  
+    const enteredValue = parseInt(text);
+    console.log(enteredValue)
     if (!isNaN(enteredValue) && enteredValue >= 10 && enteredValue <= 120) {
+      console.log(enteredValue)
       setWorkoutTime(enteredValue.toString());
     } else {
       Alert.alert(
@@ -44,7 +45,7 @@ const WorkoutSettingsScreen = () => {
   const handleRestTimeChange = (text) => {
     const enteredValue = parseInt(text, 10);
   
-    if (!isNaN(enteredValue) && enteredValue >= 0 && enteredValue <= 120) {
+    if (enteredValue >= 0 && enteredValue <= 120) {
       setRestTime(enteredValue.toString());
     } else {
       Alert.alert(
@@ -59,13 +60,13 @@ const WorkoutSettingsScreen = () => {
   const handleIncrement = (param, maxValue) => {
     switch (param) {
       case 'workoutTime':
-        setWorkoutTime((prev) => (prev + 10 <= 120 ? prev + 10 : 120));
+        setWorkoutTime((prev) => (prev + 10 <= maxValue ? prev + 10 : maxValue));
         break;
       case 'roundTime':
-        setRoundTime((prev) => (prev + 0.5 <= 5 ? prev + 0.5 : 5));
+        setRoundTime((prev) => (prev + 0.5 <= maxValue ? prev + 0.5 : maxValue));
         break;
       case 'restTime':
-        setRestTime((prev) => (prev + 10 <= 120 ? prev + 10 : 120));
+        setRestTime((prev) => (prev + 10 <= maxValue ? prev + 10 : maxValue));
         break;
       default:
         break;
@@ -75,13 +76,13 @@ const WorkoutSettingsScreen = () => {
   const handleDecrement = (param, minValue) => {
     switch (param) {
       case 'workoutTime':
-        setWorkoutTime((prev) => (prev - 10 >= 10 ? prev - 10 : 10));
+        setWorkoutTime((prev) => (prev - 10 >= minValue ? prev - 10 : minValue));
         break;
       case 'roundTime':
-        setRoundTime((prev) => (prev - 0.5 >= 0.5 ? prev - 0.5 : 0.5));
+        setRoundTime((prev) => (prev - 0.5 >= minValue ? prev - 0.5 : minValue));
         break;
       case 'restTime':
-        setRestTime((prev) => (prev - 10 >= 0 ? prev - 10 : 0));
+        setRestTime((prev) => (prev - 10 >= minValue ? prev - 10 : minValue));
         break;
       default:
         break;
@@ -115,14 +116,16 @@ const WorkoutSettingsScreen = () => {
       <Text style = {UIStyle.mainHeaders}>CONFIGURE WORKOUT</Text>
       <View style={UIStyle.space}/>
       <View style={UIStyle.smallSpace}/>
+
       <Text style = {UIStyle.subHeaders}>Workout Time (minutes):</Text>
       <View style = {UIStyle.gridContainer}>
         <Buttons.BasicButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('workoutTime', 10)} />
         <View style={[UIStyle.space]} />
         <TextInput style={[UIStyle.textInput, UIStyle.gridItem]}
                    placeholder='60'
+                   keyboardType='numeric'
                    value={workoutTime.toString()}
-                   onEndEditing={handleWorkoutTimeChange}
+                   onEndEditing={(event) => handleWorkoutTimeChange(event.nativeEvent.text)}
                    onChangeText={setWorkoutTime} />
         <View style={UIStyle.space} />
         <Buttons.BasicButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('workoutTime', 120)} />
@@ -135,7 +138,8 @@ const WorkoutSettingsScreen = () => {
         <TextInput style={[UIStyle.textInput, UIStyle.gridItem]}
                    placeholder='1'
                    value={roundTime.toString()}
-                   onEndEditing={handleRoundTimeChange}
+                   keyboardType='numeric'
+                   onEndEditing={(event) => handleRoundTimeChange(event.nativeEvent.text)}
                    onChangeText={setRoundTime} />
         <View style={UIStyle.space} />
         <Buttons.BasicButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('roundTime', 5)} />
@@ -143,12 +147,13 @@ const WorkoutSettingsScreen = () => {
 
       <Text style = {UIStyle.subHeaders}>Rest Time (seconds):</Text>
       <View style = {UIStyle.gridContainer}>
-        <Buttons.BasicButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('restTime', 10)} />
+        <Buttons.BasicButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('restTime', 0)} />
         <View style={[UIStyle.space]} />
         <TextInput style={[UIStyle.textInput, UIStyle.gridItem]}
                    placeholder='1'
                    value={restTime.toString()}
-                   onEndEditing={handleRestTimeChange}
+                   keyboardType='numeric'
+                   onEndEditing={(event) => handleRestTimeChange(event.nativeEvent.text)}
                    onChangeText={setRestTime} />
         <View style={UIStyle.space} />
         <Buttons.BasicButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('restTime', 120)} />
