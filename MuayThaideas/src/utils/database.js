@@ -71,7 +71,7 @@ function GetDefaultComboList(){
 }
 
 function GetUserComboList(){
-  const db = SQLite.openDatabase('UserMadeCombos.db');
+  const db = SQLite.openDatabase('UserCombos.db');
   const [isLoading, setIsLoading] = useState(true);
   const [combos, setCombos] = useState([]);
   const [currentCombo, setCurrentCombo] = useState(undefined);
@@ -135,7 +135,6 @@ function GetUserComboList(){
     );
   };
   
-
   const confirmDelete = (id) => {
     db.transaction(
       (tx) => {
@@ -157,10 +156,11 @@ function GetUserComboList(){
   };
 
   const updateCombo = (id) => {
+    if(currentCombo !== undefined){
     db.transaction(tx => {
       tx.executeSql('UPDATE combos SET combo = ? WHERE id = ?', [currentCombo, id],
         (txObj, resultSet) => {
-          if(currentCombo !== undefined){
+          
             if(resultSet.rowsAffected > 0){
               let existingCombos = [...combos];
               const indexToUpdate = existingCombos.findIndex(combo => combo.id === id);
@@ -168,12 +168,13 @@ function GetUserComboList(){
               setCombos(existingCombos);
               setCurrentCombo(undefined);
             }
-          }
+        
         },
         (txObj, error) => console.log(error)
       )
     })
-  }
+  }}
+
 
   const showCombos = () => {
     return combos.map((combo, index) => {
@@ -184,8 +185,9 @@ function GetUserComboList(){
           <View style = {UIStyle.element}>
             <Text>{combo.combo}</Text>
           </View>
-            <Buttons.DeleteButton title='-' onPress={() => deleteCombo(combo.id)}/>
-            <Buttons.MiniButton title='↺' onPress={() => updateCombo(combo.id)} />
+            <Buttons.DeleteButton title='🗑 ' onPress={() => deleteCombo(combo.id)}/>
+            <View style={UIStyle.smallSpace}/>
+            <Buttons.MiniButton title='✎' onPress={() => updateCombo(combo.id)} />
             
           </View>
         </View>
@@ -212,12 +214,13 @@ function grabRandomUserCombo(callback) {
   db.transaction(
     (tx) => {
       tx.executeSql(
-        'SELECT combo FROM combos ORDER BY RANDOM() LIMIT 1',
+        'SELECT * FROM combos',
         null,
         (_, resultSet) => {
           // Check if there is at least one row
+          console.log(resultSet.rows.length)
           if (resultSet.rows.length > 0) {
-            const randomCombo = resultSet.rows.item(0).combo;
+            const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
             callback(null, randomCombo);
           } else {
             callback('No combos found');
@@ -231,5 +234,61 @@ function grabRandomUserCombo(callback) {
   );
 }
 
+function grabRandomBuiltinBeginnerCombo(callback, level) {
+  const db = openDatabase();
+  openDatabase()
+    .then(db => 
 
-export default { GetDefaultComboList, GetUserComboList, grabRandomUserCombo };
+  db.transaction(
+    (tx) => {
+      tx.executeSql(
+        'SELECT * FROM defaultcombos WHERE level = "Beginner"',
+        null,
+        (_, resultSet) => {
+          // Check if there is at least one row
+          console.log(resultSet.rows.length)
+          if (resultSet.rows.length > 0) {
+            const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
+            callback(null, randomCombo);
+          } else {
+            callback('No combos found');
+          }
+        },
+        (_, error) => callback(error)
+      );
+    },
+    (error) => callback(error),
+    () => console.log('Transaction completed')
+  ));
+}
+
+function grabRandomBuiltinAdvancedCombo(callback, level) {
+  const db = openDatabase();
+  openDatabase()
+    .then(db => 
+
+  db.transaction(
+    (tx) => {
+      tx.executeSql(
+        'SELECT * FROM defaultcombos WHERE level = "Advanced"',
+        null,
+        (_, resultSet) => {
+          // Check if there is at least one row
+          console.log(resultSet.rows.length)
+          if (resultSet.rows.length > 0) {
+            const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
+            callback(null, randomCombo);
+          } else {
+            callback('No combos found');
+          }
+        },
+        (_, error) => callback(error)
+      );
+    },
+    (error) => callback(error),
+    () => console.log('Transaction completed')
+  ));
+}
+
+
+export default { GetDefaultComboList, GetUserComboList, grabRandomUserCombo, grabRandomBuiltinBeginnerCombo, grabRandomBuiltinAdvancedCombo };

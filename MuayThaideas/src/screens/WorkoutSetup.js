@@ -106,11 +106,6 @@ const WorkoutSettingsScreen = () => {
     }
   };
 
-  const startWorkout = () => {
-    // Implement your logic for starting the workout
-    console.log('Workout started!');
-  };
-
   return (
     <View style = {homeStyle.container}>
       <View style={UIStyle.space}/>

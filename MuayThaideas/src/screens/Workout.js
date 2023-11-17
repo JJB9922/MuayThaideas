@@ -34,6 +34,7 @@ const WorkoutScreen = () => {
 
   useEffect(() => {
     if (!isWorkoutPaused) {
+      getRandomCombo();
       const workoutTimer = setInterval(() => {
         setOverallTimeRemaining((prev) => (prev > 0 ? prev - 1 : 0));
       }, 1000);
@@ -47,6 +48,23 @@ const WorkoutScreen = () => {
       navigation.navigate('WorkoutEndScreen');
     }
   }, [overallTimeRemaining, navigation]);
+
+  useEffect(() => {
+    if (overallTimeRemaining === 0) {
+      navigation.navigate('WorkoutEndScreen');
+    }
+  }, [overallTimeRemaining, navigation]);
+
+  useEffect(() => {
+    if (!userToggle && !advanced && !beginner) {
+      Alert.alert(
+        'Please select at least one combo category to continue',
+        '',
+        [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+      );
+      navigation.navigate('WorkoutSetup');
+    }
+  }, [userToggle, advanced, beginner, navigation]);
 
   useEffect(() => {
 
@@ -90,15 +108,82 @@ const WorkoutScreen = () => {
     }
   }, [overallTimeRemaining, navigation]);
 
-
-  function getRandomCombo(){ 
+  function grabUserCombo(){
     ComboList.grabRandomUserCombo((error, result) => {
       if (error) {
         console.error(error);
       } else {
+        console.log(result)
         setRandomCombo(result);
       }
     });
+  }
+
+  function grabBuiltinBeginnerCombo(){
+    ComboList.grabRandomBuiltinBeginnerCombo((error, result) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(result)
+        setRandomCombo(result);
+      }
+    });
+  }
+
+  function grabBuiltinAdvancedCombo(){
+    ComboList.grabRandomBuiltinAdvancedCombo((error, result) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(result)
+        setRandomCombo(result);
+      }
+    });
+  }
+
+  function getRandomCombo(){ 
+    //if you see this, I am very tired and my brain won't think of a better way
+    if(beginner && !advanced && !userToggle){
+      grabBuiltinBeginnerCombo();
+    } else if (advanced && !beginner && !userToggle) {
+      grabBuiltinAdvancedCombo();
+    } else if (userToggle && !beginner && !advanced){
+      grabUserCombo();
+    } else if (beginner && advanced && !userToggle){
+      let rn = RNG(0, 1);
+      if(rn === 0){
+        grabBuiltinBeginnerCombo();
+      } else if (rn === 1){
+        grabBuiltinAdvancedCombo();
+      }
+    } else if (!beginner && advanced && userToggle){
+      let rn = RNG(0, 1);
+      if(rn === 0){
+        grabUserCombo();
+      } else if (rn === 1){
+        grabBuiltinAdvancedCombo();
+      }
+    } else if (beginner && advanced && userToggle){
+      let rn = RNG(0, 2);
+      if(rn === 0){
+        grabBuiltinBeginnerCombo();
+      } else if (rn === 1){
+        grabBuiltinAdvancedCombo();
+      } else if (rn === 2){
+        grabUserCombo();
+      }
+    } else if (beginner && !advanced && userToggle){
+      let rn = RNG(0, 1);
+      if(rn === 0){
+        grabBuiltinBeginnerCombo();
+      } else if (rn === 1){
+        grabUserCombo();
+      }
+    }
+  }
+
+  function RNG(max, min){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   // Other logic for round, rest, and combo display
@@ -139,13 +224,13 @@ const WorkoutScreen = () => {
       {!isRoundActive && <Text>Rest Time Remaining: {formatTime(restTimeRemaining)}</Text>}
 
       <View style={UIStyle.space}/>
-      <Buttons.BasicButton title={isWorkoutPaused ? "Resume" : "Pause"} onPress={handlePauseResume} />
+      <Buttons.GradientButton title={isWorkoutPaused ? "Resume" : "Pause"} onPress={handlePauseResume} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
       <View style={UIStyle.space}/>
-      <Buttons.BasicButton title={isRoundActive ? "Skip Round" : "Skip Rest"} onPress={handleSkip} />
+      <Buttons.GradientButton title={isRoundActive ? "Skip Round" : "Skip Rest"} onPress={handleSkip} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
       <View style={UIStyle.space}/>
-      <Buttons.BasicButton title="Extend Rest" onPress={handleExtendRest} />
+      <Buttons.GradientButton title="Extend Rest" onPress={handleExtendRest} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
       <View style={UIStyle.space}/>
-      <Buttons.BasicButton title="Cancel Workout" onPress={handleCancelWorkout} />
+      <Buttons.GradientButton title="Cancel Workout" onPress={handleCancelWorkout} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
     </View>
   );
 };

@@ -212,11 +212,11 @@ export const UIStyle = StyleSheet.create({
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
-      padding: 16, // Add padding or adjust as needed
+      padding: 16,
     },
 
     gridItem: {
-      width: '30%', // Adjust the width based on your preference
+      width: '30%',
       paddingHorizontal: 8,
     },
 
