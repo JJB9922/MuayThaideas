@@ -77,14 +77,15 @@ export const UIStyle = StyleSheet.create({
     },
 
     mainHeaders: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 32,
-        lineHeight: 64,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
-        textAlign: 'center',
-      },
+      fontSize: 32,
+      fontWeight: 'bold',
+      letterSpacing: 0.25,
+      textAlign: 'center',
+      color: '#333', // A dark text color
+      textShadowColor: 'rgba(0, 0, 0, 0.1)',
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 2,
+    },
 
     space:{
         height: 20,
@@ -103,7 +104,73 @@ export const UIStyle = StyleSheet.create({
     },
 
     scrollview: {
-      flex: 1,
       marginHorizontal: 20,
-    }
+      marginVertical: 20,
+    },
+
+    deleteButton: {
+      backgroundColor: '#90323D',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 8,
+      alignItems: 'center',
+    },
+
+    deleteButtonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+
+    addComboButton: {
+      borderRadius: 8,
+      overflow: 'hidden',
+    },
+
+    buttonGradient: {
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 8,
+      alignItems: 'center',
+    },
+
+    basicButton: {
+      backgroundColor: '#BC8034',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 8,
+      alignItems: 'center',
+    },
+
+    buttonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+
+    grid: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+
+    element: {
+      flex: 1,
+    },
+
+    textInput: {
+      width: '80%',
+      height: 40,
+      padding: 10,
+      borderColor: '#BC8034',
+      borderWidth: 2,
+      borderRadius: 8,
+      fontSize: 16,
+      color: '#333',
+    },
+
+    textInputContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#D9CAB3',
+    },
+
 })

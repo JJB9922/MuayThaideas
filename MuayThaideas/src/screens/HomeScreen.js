@@ -13,15 +13,15 @@ export default function App() {
           source={require('../../assets/logo.png')}
         />
   
-        <Buttons.MainButton title = "Start Workout" screenName = "Workout"/>
+        <Buttons.MainNavButton title = "Start Workout" screenName = "Workout"/>
   
         <View style = {UIStyle.space}/>
   
-        <Buttons.SecondaryButton title = "Combo List" screenName = "ComboList"/>
+        <Buttons.SecondaryNavButton title = "Combo List" screenName = "ComboList"/>
   
         <View style = {UIStyle.space}/>
   
-        <Buttons.SecondaryButton title = "Fighter Details" screenName = "FighterDetails"/>
+        <Buttons.SecondaryNavButton title = "Fighter Details" screenName = "FighterDetails"/>
   
         <View style = {UIStyle.space}/>
   
