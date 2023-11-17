@@ -13,6 +13,7 @@ export const homeStyle = StyleSheet.create({
         height: "100%",
         backgroundColor: '#D9CAB3',
         alignItems: 'center',
+        overflow: "scroll"
     },
   });
 
@@ -34,18 +35,15 @@ export const UIStyle = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1,
         borderColor: '#5E0B15',
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        elevation: 3,
+        shadowColor: 'rgba(0, 0, 0, 0.1)',
+        shadowOpacity: 0.8,
+        elevation: 6,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
     },
 
     mainButtonText: {
-        color: '#fff',
+        color: '#D9CAB3',
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -71,7 +69,7 @@ export const UIStyle = StyleSheet.create({
     },
 
     secondaryButtonText: {
-        color: '#fff',
+        color: '#D9CAB3',
         fontSize: 16,
         fontWeight: 'bold',
     },

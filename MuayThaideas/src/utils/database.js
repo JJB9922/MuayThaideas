@@ -26,13 +26,13 @@ function GetDefaultComboList(){
     openDatabase()
     .then(db => 
     db.transaction(tx => {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS combos (id INTEGER PRIMARY KEY AUTOINCREMENT, combo TEXT, level TEXT)');
+      tx.executeSql('CREATE TABLE IF NOT EXISTS defaultcombos (id INTEGER PRIMARY KEY AUTOINCREMENT, combo TEXT, level TEXT)');
     }));
 
     openDatabase()
     .then(db => 
     db.transaction(tx => {
-      tx.executeSql('SELECT * FROM combos', null,
+      tx.executeSql('SELECT * FROM defaultcombos', null,
         (txObj, resultSet) => setCombos(resultSet.rows._array),
         (txObj, error) => console.log(error)
       );
@@ -71,7 +71,7 @@ function GetDefaultComboList(){
 
 
 function GetUserComboList(){
-  const db = SQLite.openDatabase('UserMadeCombos.db');
+  const db = SQLite.openDatabase('UserCombos.db');
   const [isLoading, setIsLoading] = useState(true);
   const [combos, setCombos] = useState([]);
   const [currentCombo, setCurrentCombo] = useState(undefined);

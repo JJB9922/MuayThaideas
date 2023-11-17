@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import { UIStyle } from "../utils/styles";
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient }  from 'expo-linear-gradient';
@@ -16,9 +16,9 @@ function MainNavButton(props) {
     };
 
     return (
-      <TouchableOpacity style={UIStyle.mainButton} onPress={handlePress}>
-        <Text style={UIStyle.mainButtonText}>{title}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={UIStyle.mainButton} onPress={handlePress}>
+          <Text style={UIStyle.mainButtonText}>{title}</Text>
+        </TouchableOpacity>
     );
 }
 
