@@ -7,6 +7,8 @@ import HomeScreen from '../screens/HomeScreen';
 import ComboListScreen from '../screens/ComboList';
 import FighterDetailsScreen from '../screens/FighterDetails';
 import WorkoutSetupScreen from '../screens/WorkoutSetup';
+import Workout from '../screens/Workout';
+import WorkoutEndScreen from '../screens/WorkoutEndScreen'
 
 const Stack = createStackNavigator();
 
@@ -22,7 +24,9 @@ const AppNavigator = () => {
                                                                     headerStyle: UIStyle.headerStyle}}/>
         
         <Stack.Screen name="FighterDetails" component={FighterDetailsScreen} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
-        <Stack.Screen name="Workout" component={WorkoutSetupScreen} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
+        <Stack.Screen name="WorkoutSetup" component={WorkoutSetupScreen} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
+        <Stack.Screen name="Workout" component={Workout} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
+        <Stack.Screen name="WorkoutEndScreen" component={WorkoutEndScreen} options = {{title: "", headerStyle: UIStyle.headerStyle}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

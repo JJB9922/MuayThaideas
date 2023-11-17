@@ -13,7 +13,7 @@ export default function App() {
           source={require('../../assets/logo.png')}
         />
   
-        <Buttons.MainNavButton title = "Start Workout" screenName = "Workout"/>
+        <Buttons.MainNavButton title = "Start Workout" screenName = "WorkoutSetup"/>
   
         <View style = {UIStyle.space}/>
   

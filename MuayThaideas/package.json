@@ -24,7 +24,8 @@
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-web": "~0.19.6",
     "react-navigation": "^5.0.0",
-    "expo-linear-gradient": "~12.3.0"
+    "expo-linear-gradient": "~12.3.0",
+    "react-native-svg": "13.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

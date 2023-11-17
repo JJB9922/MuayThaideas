@@ -13,7 +13,7 @@ export const homeStyle = StyleSheet.create({
         height: "100%",
         backgroundColor: '#D9CAB3',
         alignItems: 'center',
-        overflow: "visible",
+        overflow: "scroll",
     },
   });
 
@@ -94,6 +94,18 @@ export const UIStyle = StyleSheet.create({
       textShadowRadius: 2,
     },
 
+    comboText: {
+      fontSize: 42,
+      fontWeight: 'bold',
+      letterSpacing: 0.25,
+      textAlign: 'center',
+      color: '#5E0B15', // A dark text color
+      textShadowColor: 'rgba(0, 0, 0, 0.1)',
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 2,
+      elevation: 3
+    },
+
     subHeaders: {
       fontSize: 16,
       fontWeight: 'bold',
@@ -169,6 +181,15 @@ export const UIStyle = StyleSheet.create({
     },
 
     basicButton: {
+      backgroundColor: '#BC8034',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 8,
+      width: "80%",
+      alignItems: 'center',
+    },
+
+    miniButton: {
       backgroundColor: '#BC8034',
       paddingVertical: 10,
       paddingHorizontal: 20,

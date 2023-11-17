@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, Switch, Alert } from 'react-native';
 import Buttons from '../components/Button';
 import { UIStyle, homeStyle } from '../utils/styles';
 
+
 const WorkoutSettingsScreen = () => {
   const [workoutTime, setWorkoutTime] = useState(60);
   const [roundTime, setRoundTime] = useState(1);
@@ -119,7 +120,7 @@ const WorkoutSettingsScreen = () => {
 
       <Text style = {UIStyle.subHeaders}>Workout Time (minutes):</Text>
       <View style = {UIStyle.gridContainer}>
-        <Buttons.BasicButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('workoutTime', 10)} />
+        <Buttons.MiniButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('workoutTime', 10)} />
         <View style={[UIStyle.space]} />
         <TextInput style={[UIStyle.textInput, UIStyle.gridItem]}
                    placeholder='60'
@@ -128,12 +129,12 @@ const WorkoutSettingsScreen = () => {
                    onEndEditing={(event) => handleWorkoutTimeChange(event.nativeEvent.text)}
                    onChangeText={setWorkoutTime} />
         <View style={UIStyle.space} />
-        <Buttons.BasicButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('workoutTime', 120)} />
+        <Buttons.MiniButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('workoutTime', 120)} />
       </View>
 
       <Text style = {UIStyle.subHeaders}>Round Time (minutes):</Text>
       <View style = {UIStyle.gridContainer}>
-        <Buttons.BasicButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('roundTime', 0.5)} />
+        <Buttons.MiniButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('roundTime', 0.5)} />
         <View style={[UIStyle.space]} />
         <TextInput style={[UIStyle.textInput, UIStyle.gridItem]}
                    placeholder='1'
@@ -142,12 +143,12 @@ const WorkoutSettingsScreen = () => {
                    onEndEditing={(event) => handleRoundTimeChange(event.nativeEvent.text)}
                    onChangeText={setRoundTime} />
         <View style={UIStyle.space} />
-        <Buttons.BasicButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('roundTime', 5)} />
+        <Buttons.MiniButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('roundTime', 5)} />
       </View>
 
       <Text style = {UIStyle.subHeaders}>Rest Time (seconds):</Text>
       <View style = {UIStyle.gridContainer}>
-        <Buttons.BasicButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('restTime', 0)} />
+        <Buttons.MiniButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('restTime', 0)} />
         <View style={[UIStyle.space]} />
         <TextInput style={[UIStyle.textInput, UIStyle.gridItem]}
                    placeholder='1'
@@ -156,7 +157,7 @@ const WorkoutSettingsScreen = () => {
                    onEndEditing={(event) => handleRestTimeChange(event.nativeEvent.text)}
                    onChangeText={setRestTime} />
         <View style={UIStyle.space} />
-        <Buttons.BasicButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('restTime', 120)} />
+        <Buttons.MiniButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('restTime', 120)} />
       </View>
 
       <Text style = {UIStyle.subHeaders}>Toggle Beginner Combinations: {beginner ? 'ON' : 'OFF'}</Text>
@@ -180,7 +181,20 @@ const WorkoutSettingsScreen = () => {
       trackColor={{true: '#BC8034', false: '#8C7A6B'}}
       thumbColor='#D9CAB3'/>
 
-      <Buttons.LargeGradientButton title="Start Workout" onPress={startWorkout} colour1={'#90323D'} colour2={'#5E0B15'}/>
+
+      <Buttons.StartWorkoutButton
+      title="Start Workout" 
+      colour1={'#90323D'} 
+      colour2={'#5E0B15'}
+      screenName="Workout"
+      params = {{
+        workoutTime: parseFloat(workoutTime, 10),
+        roundTime: parseFloat(roundTime, 10),
+        restTime: parseFloat(restTime, 10),
+        beginner: beginner,
+        advanced: advanced,
+        userToggle: userToggle,
+      }} />
     </View>
   );
 };

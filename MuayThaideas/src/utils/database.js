@@ -33,7 +33,8 @@ function GetDefaultComboList(){
     .then(db => 
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM defaultcombos', null,
-        (txObj, resultSet) => setCombos(resultSet.rows._array),
+        (txObj, resultSet) => {setCombos(resultSet.rows._array)
+                              console.log(resultSet)},
         (txObj, error) => console.log(error)
       );
     }));
@@ -69,9 +70,8 @@ function GetDefaultComboList(){
   )
 }
 
-
 function GetUserComboList(){
-  const db = SQLite.openDatabase('UserCombos.db');
+  const db = SQLite.openDatabase('UserMadeCombos.db');
   const [isLoading, setIsLoading] = useState(true);
   const [combos, setCombos] = useState([]);
   const [currentCombo, setCurrentCombo] = useState(undefined);
@@ -155,7 +155,6 @@ function GetUserComboList(){
       () => console.log('Deleted combo successfully')
     );
   };
-  
 
   const updateCombo = (id) => {
     db.transaction(tx => {
@@ -186,13 +185,14 @@ function GetUserComboList(){
             <Text>{combo.combo}</Text>
           </View>
             <Buttons.DeleteButton title='-' onPress={() => deleteCombo(combo.id)}/>
-            <Buttons.BasicButton title='↺' onPress={() => updateCombo(combo.id)} />
+            <Buttons.MiniButton title='↺' onPress={() => updateCombo(combo.id)} />
             
           </View>
         </View>
       );
     });
   };
+
 
   return(
       <View>
@@ -206,5 +206,30 @@ function GetUserComboList(){
   )
 }
 
+function grabRandomUserCombo(callback) {
+  const db = SQLite.openDatabase('UserCombos.db');
+  
+  db.transaction(
+    (tx) => {
+      tx.executeSql(
+        'SELECT combo FROM combos ORDER BY RANDOM() LIMIT 1',
+        null,
+        (_, resultSet) => {
+          // Check if there is at least one row
+          if (resultSet.rows.length > 0) {
+            const randomCombo = resultSet.rows.item(0).combo;
+            callback(null, randomCombo);
+          } else {
+            callback('No combos found');
+          }
+        },
+        (_, error) => callback(error)
+      );
+    },
+    (error) => callback(error),
+    () => console.log('Transaction completed')
+  );
+}
 
-export default { GetDefaultComboList, GetUserComboList };
+
+export default { GetDefaultComboList, GetUserComboList, grabRandomUserCombo };
