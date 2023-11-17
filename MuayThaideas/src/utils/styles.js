@@ -157,7 +157,7 @@ export const UIStyle = StyleSheet.create({
       overflow: 'visible',
       width: '60%',
       height: '60%',
-      paddingVertical: 32,
+      paddingVertical: 10,
       paddingHorizontal: 10,
     },
 
