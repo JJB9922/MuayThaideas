@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UIStyle, homeStyle } from '../utils/styles';
+import { useKeepAwake } from "expo-keep-awake";
 import Buttons from '../components/Button'
 import ComboList from '../utils/database'
+
 
 const WorkoutScreen = () => {
   const navigation = useNavigation();
@@ -23,6 +25,7 @@ const WorkoutScreen = () => {
   const [roundTimeRemaining, setRoundTimeRemaining] = useState(roundTime * 60 + 5);
   const [restTimeRemaining, setRestTimeRemaining] = useState(restTime);
   const [randomCombo, setRandomCombo] = useState(null);
+  useKeepAwake();
 
   const restTimerRef = useRef(null);
 
@@ -88,12 +91,15 @@ const WorkoutScreen = () => {
   
   useEffect(() => {
     if (roundTimeRemaining === 0) {
-      setRestTimeRemaining(restTime);
       setIsRoundActive(false);
-    } else if (restTimeRemaining === 0) {
+      setRestTimeRemaining(restTime);
       setRoundTimeRemaining(roundTime * 60);
+      setRandomCombo(null)
+    } else if (restTimeRemaining === 0) {
       setIsRoundActive(true);
-      getRandomCombo();
+      setRestTimeRemaining(restTime);
+      setRoundTimeRemaining(roundTime * 60);
+      setRandomCombo();
     }
   }, [roundTimeRemaining, restTimeRemaining]);
 

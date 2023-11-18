@@ -11,10 +11,10 @@ async function openDatabase() {
     await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "SQLite");
   }
   await FileSystem.downloadAsync(
-    Asset.fromModule(require("../../assets/builtincombos.db")).uri,
-    FileSystem.documentDirectory + "SQLite/builtincombos.db"
+    Asset.fromModule(require("../../assets/builtin.db")).uri,
+    FileSystem.documentDirectory + "SQLite/builtin.db"
   );
-  return SQLite.openDatabase("builtincombos.db","1.0");
+  return SQLite.openDatabase("builtin.db","1.0");
 }
 
 function GetDefaultComboList(){
