@@ -76,17 +76,17 @@ Web mode doesn't work as I use an incompatible expo filesystem import - I've bee
 
 I tried to make the UI as minimalist and as intuitive as possible: so here are some screenshots!
 
-![Home Screenshot](MuayThaideas/Screenshots/HomeScreen.jpg)
+![Home Screenshot](MuayThaideas/screenshots/HomeScreen.jpg)
 
-![Combo List Screenshot](MuayThaideas/Screenshots/ComboList.jpg)
+![Combo List Screenshot](MuayThaideas/screenshots/ComboList.jpg)
 
-![Workout Setup Screenshot](MuayThaideas/Screenshots/WorkoutSetup.jpg)
+![Workout Setup Screenshot](MuayThaideas/screenshots/WorkoutSetup.jpg)
 
-![Workout Screenshot](MuayThaideas/Screenshots/Workout1.jpg)
+![Workout Screenshot](MuayThaideas/screenshots/Workout1.jpg)
 
-![Workout Rest Screenshot](MuayThaideas/Screenshots/WorkoutRest.jpg)
+![Workout Rest Screenshot](MuayThaideas/screenshots/WorkoutRest.jpg)
 
-![Workout Continuation Screenshot](MuayThaideas/Screenshots/Workout2.jpg)
+![Workout Continuation Screenshot](MuayThaideas/screenshots/Workout2.jpg)
 
 ## Contributing
 
