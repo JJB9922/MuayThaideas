@@ -159,21 +159,21 @@ const WorkoutSettingsScreen = () => {
       <Switch 
       value={beginner} 
       onValueChange={() => handleToggle('beginner')} 
-      trackColor={{true: '#3C787E', false: '#5E807F'}}
+      trackColor={{true: '#2E4057', false: '#495867'}}
       thumbColor='#D9CAB3'/>
 
       <Text style = {UIStyle.subHeaders}>Toggle Advanced Combinations: {advanced ? 'ON' : 'OFF'}</Text>
       <Switch 
       value={advanced} 
       onValueChange={() => handleToggle('advanced')} 
-      trackColor={{true: '#3C787E', false: '#5E807F'}}
+      trackColor={{true: '#2E4057', false: '#495867'}}
       thumbColor='#D9CAB3'/>
       
       <Text style = {UIStyle.subHeaders}>Toggle User Combinations: {userToggle ? 'ON' : 'OFF'}</Text>
       <Switch 
       value={userToggle} 
       onValueChange={() => handleToggle('userToggle')} 
-      trackColor={{true: '#3C787E', false: '#5E807F'}}
+      trackColor={{true: '#2E4057', false: '#495867'}}
       thumbColor='#D9CAB3'/>
 
 

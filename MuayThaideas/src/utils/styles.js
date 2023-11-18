@@ -4,11 +4,11 @@ import { StyleSheet } from 'react-native';
     // #5E0B15 - Dark Red
     // #90323D - Light Red
     // #D9CAB3 - Cream/White 
-    // #3C787E - Bronze
-    // #5E807F - Brown
+    // #2E4057 - Bronze
+    // #495867 - Brown
 
-    // #3C787E - Green
-    // #5E807F - Dark
+    // #2E4057 - Green
+    // #495867 - Dark
 
 export const homeStyle = StyleSheet.create({
     container: {
@@ -191,7 +191,7 @@ export const UIStyle = StyleSheet.create({
     },
 
     basicButton: {
-      backgroundColor: '#3C787E',
+      backgroundColor: '#2E4057',
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 8,
@@ -200,7 +200,7 @@ export const UIStyle = StyleSheet.create({
     },
 
     miniButton: {
-      backgroundColor: '#3C787E',
+      backgroundColor: '#2E4057',
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 8,
@@ -238,7 +238,7 @@ export const UIStyle = StyleSheet.create({
       width: '80%',
       height: 40,
       padding: 10,
-      borderColor: '#3C787E',
+      borderColor: '#2E4057',
       borderWidth: 2,
       borderRadius: 8,
       fontSize: 16,

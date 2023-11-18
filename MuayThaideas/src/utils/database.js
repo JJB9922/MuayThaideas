@@ -202,7 +202,7 @@ function GetUserComboList(){
           <TextInput style={UIStyle.textInput} value={currentCombo} placeholder='Input Combo...' onChangeText={setCurrentCombo}/>
         </View>
         <View style={UIStyle.space}/>
-        <Buttons.GradientButton title='Add Combo' onPress ={addCombo} colour1={'#3C787E'} colour2={'#5E807F'}/>
+        <Buttons.GradientButton title='Add Combo' onPress ={addCombo} colour1={'#2E4057'} colour2={'#495867'}/>
         {showCombos()}
       </View>
   )
@@ -223,7 +223,14 @@ function grabRandomUserCombo(callback) {
             const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
             callback(null, randomCombo);
           } else {
-            callback('No combos found');
+              Alert.alert('No User Combos Found', 'Please create combos in the Combo List, or select the builtin combo categories.', [
+                {
+                  text: 'OK',
+                  onPress: () => {
+                    callback('No combos found');
+                  },
+                },
+              ]);
           }
         },
         (_, error) => callback(error)

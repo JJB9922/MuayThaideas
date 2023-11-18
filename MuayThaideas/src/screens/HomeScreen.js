@@ -21,7 +21,7 @@ export default function App() {
   
         <View style = {UIStyle.space}/>
   
-        <Buttons.SecondaryNavButton title = "Fighter Details" screenName = "FighterDetails"/>
+        {/* <Buttons.SecondaryNavButton title = "Fighter Details" screenName = "FighterDetails"/> */}
   
         <View style = {UIStyle.space}/>
   
