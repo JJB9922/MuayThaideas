@@ -181,6 +181,8 @@ export const UIStyle = StyleSheet.create({
       paddingHorizontal: 20,
       borderRadius: 8,
       alignItems: 'center',
+      width: 200,  // Set the width you want for all buttons
+      height: 50,  // Set the height you want for all buttons
     },
 
     smallGradientButton: {

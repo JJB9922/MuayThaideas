@@ -35,6 +35,7 @@ const WorkoutScreen = () => {
     return `${minutes} minutes, ${seconds} seconds`;
   };
 
+
   useEffect(() => {
     if (!isWorkoutPaused) {
       const workoutTimer = setInterval(() => {
@@ -242,14 +243,15 @@ const WorkoutScreen = () => {
       <View style={UIStyle.space}/>
       <View style={UIStyle.space}/>
       <View style={UIStyle.space}/>
+      
 
-      <Buttons.SmallGradientButton title={isWorkoutPaused ? "Resume" : "Pause"} onPress={handlePauseResume} colour1={'#2E4057'} colour2={'#495867'}/>
+      <Buttons.SmallGradientButton title={isWorkoutPaused ? "Resume" : "Pause"} onPress={handlePauseResume} colour1={'#2E4057'} colour2={'#495867'} />
 
       <Buttons.SmallGradientButton title={isRoundActive ? "Skip Round" : "Skip Rest"} onPress={handleSkip} colour1={'#2E4057'} colour2={'#495867'}/>
 
       <Buttons.SmallGradientButton title="Extend Rest" onPress={handleExtendRest} colour1={'#2E4057'} colour2={'#495867'}/>
 
-      <Buttons.SmallGradientButton title="Cancel Workout" onPress={handleCancelWorkout} colour1={'#2E4057'} colour2={'#495867'}/>
+      <Buttons.SmallGradientButton title="Cancel Workout" onPress={handleCancelWorkout}  colour1={'#2E4057'} colour2={'#495867'}/>
     </View>
   );
 };
