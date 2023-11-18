@@ -76,7 +76,7 @@ Web mode doesn't work as I use an incompatible expo filesystem import - I've bee
 
 I tried to make the UI as minimalist and as intuitive as possible: so here are some screenshots!
 
-<img src=MuayThaideas/screenshots/HomeScreen.jpg" width="100">
+<img src="MuayThaideas/screenshots/HomeScreen.jpg" width="100">
 
 ![Combo List Screenshot](MuayThaideas/screenshots/ComboList.jpg)
 
