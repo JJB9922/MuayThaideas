@@ -13,8 +13,6 @@
 
 ## About The Project
 
-![Screen Shot](images/screenshot.png)
-
 Not sure if it's just me, but whenever I get in front of a punching bag, my mind loses all capability of thought. Rather than drilling combinations from the previous class, it's usually a case of throw with no thought until I'm bored.
 
 I put together this app to simply guide me through a light bag workout.
