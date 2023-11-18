@@ -1,6 +1,5 @@
-// WorkoutScreen.js
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UIStyle, homeStyle } from '../utils/styles';
 import Buttons from '../components/Button'
@@ -24,6 +23,7 @@ const WorkoutScreen = () => {
   const [roundTimeRemaining, setRoundTimeRemaining] = useState(roundTime * 60 + 5);
   const [restTimeRemaining, setRestTimeRemaining] = useState(restTime);
   const [randomCombo, setRandomCombo] = useState(null);
+
   const restTimerRef = useRef(null);
 
   const formatTime = (timeInSeconds) => {
@@ -67,7 +67,6 @@ const WorkoutScreen = () => {
   }, [userToggle, advanced, beginner, navigation]);
 
   useEffect(() => {
-
     if (isRoundActive && !isWorkoutPaused) {
       getRandomCombo();
       const roundTimer = setInterval(() => {
@@ -89,7 +88,6 @@ const WorkoutScreen = () => {
   }, [isRoundActive, isWorkoutPaused, restTimeRemaining]);
   
   useEffect(() => {
-    // Switch between round and rest timers
     if (roundTimeRemaining === 0) {
       setRestTimeRemaining(restTime);
       setIsRoundActive(false);
@@ -101,10 +99,8 @@ const WorkoutScreen = () => {
   }, [roundTimeRemaining, restTimeRemaining]);
 
   useEffect(() => {
-    // Handle workout end
     if (overallTimeRemaining === 0) {
-      // Navigate to a screen indicating the workout is over
-      navigation.navigate('WorkoutEndScreen');
+      navigation.navigate('WorkoutSetup');
     }
   }, [overallTimeRemaining, navigation]);
 
@@ -150,43 +146,45 @@ const WorkoutScreen = () => {
     } else if (userToggle && !beginner && !advanced){
       grabUserCombo();
     } else if (beginner && advanced && !userToggle){
-      let rn = RNG(0, 1);
-      if(rn === 0){
+      if(RNG(0, 1) === 0){
         grabBuiltinBeginnerCombo();
-      } else if (rn === 1){
+      } else if (RNG(0, 1) === 1){
         grabBuiltinAdvancedCombo();
       }
     } else if (!beginner && advanced && userToggle){
-      let rn = RNG(0, 1);
-      if(rn === 0){
+      if(RNG(0, 1) === 0){
         grabUserCombo();
-      } else if (rn === 1){
+      } else if (RNG(0, 1) === 1){
         grabBuiltinAdvancedCombo();
       }
     } else if (beginner && advanced && userToggle){
-      let rn = RNG(0, 2);
-      if(rn === 0){
+      if(RNG(0, 1) === 0){
         grabBuiltinBeginnerCombo();
-      } else if (rn === 1){
+      } else if (RNG(0, 1) === 1){
         grabBuiltinAdvancedCombo();
-      } else if (rn === 2){
+      } else if (RNG(0, 1) === 2){
         grabUserCombo();
       }
     } else if (beginner && !advanced && userToggle){
-      let rn = RNG(0, 1);
-      if(rn === 0){
+      if(RNG(0, 1) === 0){
         grabBuiltinBeginnerCombo();
-      } else if (rn === 1){
+      } else if (RNG(0, 1) === 1){
+        grabUserCombo();
+      }
+    } else if (beginner && advanced && userToggle) {
+      if(RNG(0,2) === 0){
+        grabBuiltinAdvancedCombo();
+      } else if (RNG(0,2) == 1){
+        grabBuiltinBeginnerCombo();
+      } else if (RNG(0,2) == 2){
         grabUserCombo();
       }
     }
   }
 
-  function RNG(max, min){
+  function RNG(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
-  // Other logic for round, rest, and combo display
 
   const handlePauseResume = () => {
     setIsWorkoutPaused((prev) => !prev);
@@ -204,33 +202,45 @@ const WorkoutScreen = () => {
   };
 
   const handleExtendRest = () => {
-    // Logic to extend the rest time
+    if(!isRoundActive){
+      setRestTimeRemaining((prev) => (prev > 0 ? prev + 10 : 10));
+    }
   };
 
   const handleCancelWorkout = () => {
-    // Logic to navigate back to the home screen or any other desired action
     navigation.goBack();
   };
 
   return (
     <View style={homeStyle.container}>
-      <Text>Workout Time Remaining: {formatTime(overallTimeRemaining)} seconds</Text>
+      <Text style={UIStyle.subHeaders}>Workout Time Remaining: {formatTime(overallTimeRemaining)} seconds</Text>
+
+      <View style={UIStyle.space}/>
+      <View style={UIStyle.space}/>
+      <View style={UIStyle.space}/>
 
       <Text style = {UIStyle.comboText}>
         {randomCombo !== null ? randomCombo : 'REST'}
       </Text>
 
-      {isRoundActive && <Text>Round Time Remaining: {formatTime(roundTimeRemaining)}</Text>}
-      {!isRoundActive && <Text>Rest Time Remaining: {formatTime(restTimeRemaining)}</Text>}
+      <View style={UIStyle.space}/>
+      <View style={UIStyle.space}/>
+      <View style={UIStyle.space}/>
+
+      {isRoundActive && <Text style={UIStyle.subHeaders}>Round Time Remaining: {formatTime(roundTimeRemaining)}</Text>}
+      {!isRoundActive && <Text style={UIStyle.subHeaders}>Rest Time Remaining: {formatTime(restTimeRemaining)}</Text>}
 
       <View style={UIStyle.space}/>
-      <Buttons.GradientButton title={isWorkoutPaused ? "Resume" : "Pause"} onPress={handlePauseResume} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
       <View style={UIStyle.space}/>
-      <Buttons.GradientButton title={isRoundActive ? "Skip Round" : "Skip Rest"} onPress={handleSkip} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
       <View style={UIStyle.space}/>
-      <Buttons.GradientButton title="Extend Rest" onPress={handleExtendRest} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
-      <View style={UIStyle.space}/>
-      <Buttons.GradientButton title="Cancel Workout" onPress={handleCancelWorkout} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
+
+      <Buttons.SmallGradientButton title={isWorkoutPaused ? "Resume" : "Pause"} onPress={handlePauseResume} colour1={'#3C787E'} colour2={'#5E807F'}/>
+
+      <Buttons.SmallGradientButton title={isRoundActive ? "Skip Round" : "Skip Rest"} onPress={handleSkip} colour1={'#3C787E'} colour2={'#5E807F'}/>
+
+      <Buttons.SmallGradientButton title="Extend Rest" onPress={handleExtendRest} colour1={'#3C787E'} colour2={'#5E807F'}/>
+
+      <Buttons.SmallGradientButton title="Cancel Workout" onPress={handleCancelWorkout} colour1={'#3C787E'} colour2={'#5E807F'}/>
     </View>
   );
 };

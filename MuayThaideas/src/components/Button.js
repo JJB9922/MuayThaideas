@@ -62,6 +62,22 @@ function GradientButton({ title, onPress, colour1, colour2 }){
   );
 };
 
+function SmallGradientButton({ title, onPress, colour1, colour2 }){
+  return (
+    <TouchableOpacity style={UIStyle.smallGradientButton} onPress={onPress}>
+      <LinearGradient
+        colors={[colour1, colour2]}
+        style={UIStyle.buttonGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      >
+        <Text style={UIStyle.buttonText}>{title}</Text>
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+};
+
+
 function StartWorkoutButton(props){
 
     const navigation = useNavigation();
@@ -105,6 +121,6 @@ function MiniButton({ title, onPress }){
   );
 };
 
- export default { MainNavButton, SecondaryNavButton, DeleteButton, GradientButton, BasicButton, StartWorkoutButton, MiniButton }; 
+ export default { MainNavButton, SecondaryNavButton, DeleteButton, GradientButton, BasicButton, StartWorkoutButton, MiniButton, SmallGradientButton }; 
   
   

@@ -4,8 +4,11 @@ import { StyleSheet } from 'react-native';
     // #5E0B15 - Dark Red
     // #90323D - Light Red
     // #D9CAB3 - Cream/White 
-    // #BC8034 - Bronze
-    // #8C7A6B - Brown
+    // #3C787E - Bronze
+    // #5E807F - Brown
+
+    // #3C787E - Green
+    // #5E807F - Dark
 
 export const homeStyle = StyleSheet.create({
     container: {
@@ -95,7 +98,7 @@ export const UIStyle = StyleSheet.create({
     },
 
     comboText: {
-      fontSize: 42,
+      fontSize: 36,
       fontWeight: 'bold',
       letterSpacing: 0.25,
       textAlign: 'center',
@@ -180,8 +183,15 @@ export const UIStyle = StyleSheet.create({
       alignItems: 'center',
     },
 
+    smallGradientButton: {
+      paddingVertical: 10,
+      borderRadius: 8,
+      width: "100%",
+      alignItems: 'center',
+    },
+
     basicButton: {
-      backgroundColor: '#BC8034',
+      backgroundColor: '#3C787E',
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 8,
@@ -190,7 +200,7 @@ export const UIStyle = StyleSheet.create({
     },
 
     miniButton: {
-      backgroundColor: '#BC8034',
+      backgroundColor: '#3C787E',
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 8,
@@ -228,7 +238,7 @@ export const UIStyle = StyleSheet.create({
       width: '80%',
       height: 40,
       padding: 10,
-      borderColor: '#BC8034',
+      borderColor: '#3C787E',
       borderWidth: 2,
       borderRadius: 8,
       fontSize: 16,

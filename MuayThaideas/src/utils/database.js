@@ -11,10 +11,10 @@ async function openDatabase() {
     await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "SQLite");
   }
   await FileSystem.downloadAsync(
-    Asset.fromModule(require("../../assets/sqlite.db")).uri,
-    FileSystem.documentDirectory + "SQLite/sqlite.db"
+    Asset.fromModule(require("../../assets/builtincombos.db")).uri,
+    FileSystem.documentDirectory + "SQLite/builtincombos.db"
   );
-  return SQLite.openDatabase("sqlite.db","1.0");
+  return SQLite.openDatabase("builtincombos.db","1.0");
 }
 
 function GetDefaultComboList(){
@@ -202,7 +202,7 @@ function GetUserComboList(){
           <TextInput style={UIStyle.textInput} value={currentCombo} placeholder='Input Combo...' onChangeText={setCurrentCombo}/>
         </View>
         <View style={UIStyle.space}/>
-        <Buttons.GradientButton title='Add Combo' onPress ={addCombo} colour1={'#BC8034'} colour2={'#8C7A6B'}/>
+        <Buttons.GradientButton title='Add Combo' onPress ={addCombo} colour1={'#3C787E'} colour2={'#5E807F'}/>
         {showCombos()}
       </View>
   )
@@ -234,7 +234,7 @@ function grabRandomUserCombo(callback) {
   );
 }
 
-function grabRandomBuiltinBeginnerCombo(callback, level) {
+function grabRandomBuiltinBeginnerCombo(callback) {
   const db = openDatabase();
   openDatabase()
     .then(db => 
@@ -262,18 +262,17 @@ function grabRandomBuiltinBeginnerCombo(callback, level) {
   ));
 }
 
-function grabRandomBuiltinAdvancedCombo(callback, level) {
+function grabRandomBuiltinAdvancedCombo(callback) {
   const db = openDatabase();
   openDatabase()
     .then(db => 
-
   db.transaction(
     (tx) => {
       tx.executeSql(
-        'SELECT * FROM defaultcombos WHERE level = "Advanced"',
+        'SELECT * FROM "defaultcombos" WHERE level = "Advanced"',
         null,
         (_, resultSet) => {
-          // Check if there is at least one row
+
           console.log(resultSet.rows.length)
           if (resultSet.rows.length > 0) {
             const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
