@@ -4122,6 +4122,11 @@ expo-constants@~14.4.2:
     "@expo/config" "~8.1.0"
     uuid "^3.3.2"
 
+expo-document-picker@^11.7.0:
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/expo-document-picker/-/expo-document-picker-11.7.0.tgz#05a4f8681262692bca20264fa66f84433292d8f4"
+  integrity sha512-y5OgUuJlip/Vj3CXi6Rfx6PqMkoYwytKmgN6x8afRPehVcYVk3j/EZxvz1MLgUhCmjyFnIpfgG5WTf8uSNbIiA==
+
 expo-file-system@~15.4.0, expo-file-system@~15.4.4:
   version "15.4.4"
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-15.4.4.tgz#b29e0507b57ee0cc7173cf8844aaf992e411f518"
@@ -4146,6 +4151,11 @@ expo-linear-gradient@~12.3.0:
   resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-12.3.0.tgz#7abd8fedbf0138c86805aebbdfbbf5e5fa865f19"
   integrity sha512-f9e+Oxe5z7fNQarTBZXilMyswlkbYWQHONVfq8MqmiEnW3h9XsxxmVJLG8uVQSQPUsbW+x1UUT/tnU6mkMWeLg==
 
+expo-media-library@~15.4.1:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/expo-media-library/-/expo-media-library-15.4.1.tgz#577efb13d912e28e9c3fcc5022156e204a59b7e8"
+  integrity sha512-lpWcT4pynWcE7TyNMUkLFH4YcueCTnq7UOJYRR0vewPEJeQXwRscka7zBtrhA+RSsJda013Q0615K+5lRLt14Q==
+
 expo-modules-autolinking@1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-1.5.1.tgz#363f90c172769ce12bf56c7be9ca0897adfc7a81"
@@ -4166,6 +4176,11 @@ expo-modules-core@1.5.12:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
+expo-permissions@~14.2.1:
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-14.2.1.tgz#da4a7ef45e13da99032960528267cc9ca8e964b8"
+  integrity sha512-jXGnOODtDMFvK7cwo7wIRPcnA7m1bie80gJ5BdL6Vs5kgCU7+RCLOCp3sBw7TKRPIlVMmQDhZA62bGzoBV0hkA==
+
 expo-pwa@0.0.127:
   version "0.0.127"
   resolved "https://registry.yarnpkg.com/expo-pwa/-/expo-pwa-0.0.127.tgz#b8d2fd28efff408a24e0f2539bfb47e09f8e4ebe"
@@ -4175,6 +4190,11 @@ expo-pwa@0.0.127:
     chalk "^4.0.0"
     commander "2.20.0"
     update-check "1.5.3"
+
+expo-sharing@^11.7.0:
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/expo-sharing/-/expo-sharing-11.7.0.tgz#3c3ef244e1e1933b53b1431a4691129e7b00fcb0"
+  integrity sha512-konZ7DqFUCiGss1VO/NGeTauwl0B8PyfBPsyXVyGTf52RCbecmF3txsWwVFDFAN+ufGi7a8oAxvGv03kKiTEBA==
 
 expo-sqlite@~11.3.3:
   version "11.3.3"

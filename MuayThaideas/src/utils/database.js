@@ -5,16 +5,22 @@ import { homeStyle, UIStyle } from './styles';
 import * as FileSystem from "expo-file-system";
 import {Asset} from "expo-asset";
 import Buttons from '../components/Button';
+import * as DocumentPicker from 'expo-document-picker';
+import { shareAsync } from "expo-sharing";
 
 async function openDatabase() {
-  if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite")).exists) {
-    await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "SQLite");
+  if (!(await FileSystem.getInfoAsync(
+    FileSystem.documentDirectory + "SQLite"
+  )).exists) {
+    await FileSystem.makeDirectoryAsync(
+      FileSystem.documentDirectory + "SQLite"
+    );
   }
   await FileSystem.downloadAsync(
-    Asset.fromModule(require("../../assets/builtin.db")).uri,
-    FileSystem.documentDirectory + "SQLite/builtin.db"
+    Asset.fromModule(require("../../assets/builtins.db")).uri,
+    FileSystem.documentDirectory + "SQLite/builtins.db"
   );
-  return SQLite.openDatabase("builtin.db","1.0");
+  return SQLite.openDatabase("builtins.db","1.0");
 }
 
 function GetDefaultComboList(){
@@ -33,8 +39,7 @@ function GetDefaultComboList(){
     .then(db => 
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM defaultcombos', null,
-        (txObj, resultSet) => {setCombos(resultSet.rows._array)
-                              console.log(resultSet)},
+        (txObj, resultSet) => {setCombos(resultSet.rows._array)},
         (txObj, error) => console.log(error)
       );
     }));
@@ -71,10 +76,28 @@ function GetDefaultComboList(){
 }
 
 function GetUserComboList(){
-  const db = SQLite.openDatabase('UserCombos.db');
+  const [db, setDb] = useState(SQLite.openDatabase('UserMadeCombos.db'));
   const [isLoading, setIsLoading] = useState(true);
   const [combos, setCombos] = useState([]);
   const [currentCombo, setCurrentCombo] = useState(undefined);
+
+  const exportDb = async () => {
+    await shareAsync(FileSystem.documentDirectory + 'SQLite/UserMadeCombos.db');
+  }
+  
+  const importDb = async() => {
+    let result = await DocumentPicker.getDocumentAsync({
+      copyToCacheDirectory: true
+    });
+
+    await FileSystem.copyAsync({
+      from: result.assets[0].uri,
+      to: FileSystem.documentDirectory + 'SQLite/UserMadeCombos.db',
+    });
+    
+    setDb(SQLite.openDatabase('UserMadeCombos.db'));
+    }
+
 
   useEffect(() => {
     db.transaction(tx => {
@@ -90,7 +113,7 @@ function GetUserComboList(){
 
     setIsLoading(false);
     
-  }, [])
+  }, [db])
 
   if(isLoading) {
     return(
@@ -102,11 +125,14 @@ function GetUserComboList(){
 
   const addCombo = () => {
     db.transaction(tx => {
-      tx.executeSql('INSERT INTO combos (combo, level) values (?, ?)', [currentCombo, "User"],
+      tx.executeSql('INSERT INTO combos (combo, level) values (?, ?)', 
+        [currentCombo, "User"],
         (txObj, resultSet) => {
           if(currentCombo !== undefined){
             let existingCombos = [...combos];
-            existingCombos.push({id: resultSet.insertId, combo: currentCombo, level: "User"})
+            existingCombos.push({id: resultSet.insertId, 
+                                 combo: currentCombo, 
+                                 level: "User"})
             setCombos(existingCombos);
             setCurrentCombo(undefined);
           }
@@ -134,6 +160,25 @@ function GetUserComboList(){
       { cancelable: true }
     );
   };
+
+  const deleteAllCombos = () => {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to delete all user combinations?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          onPress: () => confirmDeleteAllCombos(),
+          style: 'destructive',
+        },
+      ],
+      { cancelable: true }
+    );
+  };
   
   const confirmDelete = (id) => {
     db.transaction(
@@ -143,7 +188,8 @@ function GetUserComboList(){
           [id],
           (txObj, resultSet) => {
             if (resultSet.rowsAffected > 0) {
-              let existingCombos = [...combos].filter((combo) => combo.id !== id);
+              let existingCombos = [...combos]
+                .filter((combo) => combo.id !== id);
               setCombos(existingCombos);
             }
           },
@@ -155,15 +201,36 @@ function GetUserComboList(){
     );
   };
 
+  const confirmDeleteAllCombos = () => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          'DELETE FROM combos',
+          null,
+          (txObj, resultSet) => {
+            if (resultSet.rowsAffected > 0) {
+              setCombos([]);
+            }
+          },
+          (txObj, error) => console.log(error)
+        );
+      },
+      (error) => console.log(error),
+      () => console.log('Deleted all combo successfully')
+    );
+  };
+
   const updateCombo = (id) => {
     if(currentCombo !== undefined){
     db.transaction(tx => {
-      tx.executeSql('UPDATE combos SET combo = ? WHERE id = ?', [currentCombo, id],
+      tx.executeSql('UPDATE combos SET combo = ? WHERE id = ?', 
+          [currentCombo, id],
         (txObj, resultSet) => {
           
             if(resultSet.rowsAffected > 0){
               let existingCombos = [...combos];
-              const indexToUpdate = existingCombos.findIndex(combo => combo.id === id);
+              const indexToUpdate = existingCombos
+                .findIndex(combo => combo.id === id);
               existingCombos[indexToUpdate].combo = currentCombo;
               setCombos(existingCombos);
               setCurrentCombo(undefined);
@@ -185,9 +252,11 @@ function GetUserComboList(){
           <View style = {UIStyle.element}>
             <Text>{combo.combo}</Text>
           </View>
-            <Buttons.DeleteButton title='🗑 ' onPress={() => deleteCombo(combo.id)}/>
+            <Buttons.DeleteButton title='🗑 ' 
+                                  onPress={() => deleteCombo(combo.id)}/>
             <View style={UIStyle.smallSpace}/>
-            <Buttons.MiniButton title='✎' onPress={() => updateCombo(combo.id)} />
+            <Buttons.MiniButton title='✎' 
+                                onPress={() => updateCombo(combo.id)} />
             
           </View>
         </View>
@@ -199,17 +268,28 @@ function GetUserComboList(){
   return(
       <View>
         <View style={UIStyle.textInputContainer}>
-          <TextInput style={UIStyle.textInput} value={currentCombo} placeholder='Input Combo...' onChangeText={setCurrentCombo}/>
+          <TextInput style={UIStyle.textInput} 
+                     value={currentCombo} 
+                     placeholder='Input Combo...' 
+                     onChangeText={setCurrentCombo}/>
         </View>
         <View style={UIStyle.space}/>
-        <Buttons.GradientButton title='Add Combo' onPress ={addCombo} colour1={'#2E4057'} colour2={'#495867'}/>
+        <Buttons.GradientButton title='Add Combo' 
+                                onPress ={addCombo} 
+                                colour1={'#2E4057'} 
+                                colour2={'#495867'}/>
         {showCombos()}
+        <View style={UIStyle.gridContainer}>
+        <Buttons.SmallGradientButton title="Delete All" onPress={deleteAllCombos} colour1={'#5E0B15'} colour2={'#90323D'}/>
+        <Buttons.SmallGradientButton title="Export Database" onPress={exportDb} colour1={'#2E4057'} colour2={'#495867'}/>
+        <Buttons.SmallGradientButton title="Import Database" onPress={importDb} colour1={'#2E4057'} colour2={'#495867'}/>
+        </View>
       </View>
   )
 }
 
 function grabRandomUserCombo(callback) {
-  const db = SQLite.openDatabase('UserCombos.db');
+  const db = SQLite.openDatabase('UserMadeCombos.db');
   
   db.transaction(
     (tx) => {
@@ -220,7 +300,12 @@ function grabRandomUserCombo(callback) {
           // Check if there is at least one row
           console.log(resultSet.rows.length)
           if (resultSet.rows.length > 0) {
-            const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
+            const randomCombo = resultSet
+              .rows
+                .item(Math
+                  .floor(Math
+                    .random() * ((resultSet.rows.length-1) - 0 + 1)) + 0)
+                      .combo;        
             callback(null, randomCombo);
           } else {
               Alert.alert('No User Combos Found', 'Please create combos in the Combo List, or select the builtin combo categories.', [
@@ -255,7 +340,12 @@ function grabRandomBuiltinBeginnerCombo(callback) {
           // Check if there is at least one row
           console.log(resultSet.rows.length)
           if (resultSet.rows.length > 0) {
-            const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
+            const randomCombo = resultSet
+              .rows
+                .item(Math
+                  .floor(Math
+                    .random() * ((resultSet.rows.length-1) - 0 + 1)) + 0)
+                      .combo;        
             callback(null, randomCombo);
           } else {
             callback('No combos found');
@@ -282,7 +372,12 @@ function grabRandomBuiltinAdvancedCombo(callback) {
 
           console.log(resultSet.rows.length)
           if (resultSet.rows.length > 0) {
-            const randomCombo = resultSet.rows.item(Math.floor(Math.random() * ((resultSet.rows.length-1) - 0 + 1)) + 0).combo;        
+            const randomCombo = resultSet
+              .rows
+                .item(Math
+                  .floor(Math
+                    .random() * ((resultSet.rows.length-1) - 0 + 1)) + 0)
+                      .combo;        
             callback(null, randomCombo);
           } else {
             callback('No combos found');
@@ -297,4 +392,6 @@ function grabRandomBuiltinAdvancedCombo(callback) {
 }
 
 
-export default { GetDefaultComboList, GetUserComboList, grabRandomUserCombo, grabRandomBuiltinBeginnerCombo, grabRandomBuiltinAdvancedCombo };
+export default { GetDefaultComboList, GetUserComboList, 
+                 grabRandomUserCombo, grabRandomBuiltinBeginnerCombo, 
+                 grabRandomBuiltinAdvancedCombo };
