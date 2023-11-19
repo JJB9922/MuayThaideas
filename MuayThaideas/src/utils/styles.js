@@ -183,6 +183,17 @@ export const UIStyle = StyleSheet.create({
       alignItems: 'center',
     },
 
+    workoutButton: {
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 20,
+      width: 200,  // Set the width you want for all buttons
+      height: 50,  // Set the height you want for all buttons
+    },
+
     smallGradientButton: {
       paddingVertical: 10,
       borderRadius: 8,
