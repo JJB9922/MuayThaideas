@@ -15,7 +15,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "usesIcloudStorage": true,
+      "bundleIdentifier": "com.muaythaideas.sqlitedb"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,6 +33,19 @@
       "eas": {
         "projectId": "7504cd0d-606c-4745-82af-3afbb410a4ef"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Development"
+        }
+      ],
+      [
+        "expo-media-library",{
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ]
   }
 }
