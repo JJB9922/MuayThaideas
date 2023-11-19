@@ -19,7 +19,7 @@ I put together this app to simply guide me through a light bag workout.
 
 Features:
  - A set of built-in beginner & advanced combinations.
- - User can add, edit and delete their own combinations.
+ - User can add, edit and delete their own combinations, as well as export and import user-made databases.
  - User can set up a workout defining the overall workout time, individual round time and rest time.
  - Some niceties also exist during the workout - pause/resume, skip a round, skip a rest, extend a rest by 10s, and cancel the workout.
 
