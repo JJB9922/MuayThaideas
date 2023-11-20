@@ -9,9 +9,7 @@
   </p>
 </p>
 
-![Forks](https://img.shields.io/github/forks/JJB9922/MuayThaideas?style=social) 
-
-![GitHub Repo stars](https://img.shields.io/github/stars/JJB9922/MuayThaideas?style=social)
+![Forks](https://img.shields.io/github/forks/JJB9922/MuayThaideas?style=social) | ![GitHub Repo stars](https://img.shields.io/github/stars/JJB9922/MuayThaideas?style=social)
 
 ## About The Project
 
