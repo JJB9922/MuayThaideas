@@ -103,6 +103,6 @@ Contributions are what make the open source community such an amazing place to b
 
 Distributed under the MIT License. See [LICENSE](https://github.com/JJB9922/MuayThaideas/blob/main/LICENSE.md) for more information.
 
-## Authors
+##### Post
 
-* **JJB9922** - *Software Engineer* - [JJB9922](https://github.com/JJB9922/) - *Made the app!*
+https://dev.to/jjb9922/muay-thaideas-a-roundhouse-kickstart-1c5a
