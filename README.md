@@ -76,12 +76,12 @@ Web mode doesn't work as I use an incompatible expo filesystem import - I've bee
 
 I tried to make the UI as minimalist and as intuitive as possible: so here are some screenshots!
 
-<img src="MuayThaideas/screenshots/HomeScreen.jpg" width="250">
+<img src="https://github.com/JJB9922/MuayThaideas/assets/105116192/6ed14fe1-3762-4d30-a32f-f44b7cd8b1df" width="250">
 <img src="https://github.com/JJB9922/MuayThaideas/assets/105116192/185ee6d1-e5fa-4e81-aa52-7e6d8e5261d9" width=250">
-<img src="MuayThaideas/screenshots/WorkoutSetup.jpg" width="250">
-<img src="MuayThaideas/screenshots/Workout1.jpg" width="250">
-<img src="MuayThaideas/screenshots/WorkoutRest.jpg" width="250">
-<img src="MuayThaideas/screenshots/Workout2.jpg" width="250">
+<img src="https://github.com/JJB9922/MuayThaideas/assets/105116192/9f9863ba-1d39-494b-a445-9b2d88142b4f" width="250">
+<img src="https://github.com/JJB9922/MuayThaideas/assets/105116192/9e12b6d2-449a-4305-bfc7-17ffb7650663" width="250">
+<img src="https://github.com/JJB9922/MuayThaideas/assets/105116192/e9a4ef11-46df-4e2d-b17a-e5a78ab216d1" width="250">
+<img src="https://github.com/JJB9922/MuayThaideas/assets/105116192/ff890114-7942-4465-9ff4-989d2478a568" width="250">
 
 ## Contributing
 
