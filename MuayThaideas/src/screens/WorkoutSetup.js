@@ -46,7 +46,7 @@ const WorkoutSettingsScreen = () => {
   const handleRestTimeChange = (text) => {
     const enteredValue = parseInt(text, 10);
   
-    if (enteredValue >= 0 && enteredValue <= 120) {
+    if (enteredValue > 0 && enteredValue <= 120) {
       setRestTime(enteredValue.toString());
     } else {
       Alert.alert(
@@ -108,7 +108,6 @@ const WorkoutSettingsScreen = () => {
 
   return (
     <View style = {homeStyle.container}>
-      <View style={UIStyle.space}/>
       <Text style = {UIStyle.mainHeaders}>CONFIGURE WORKOUT</Text>
       <View style={UIStyle.space}/>
       <View style={UIStyle.smallSpace}/>
@@ -127,6 +126,8 @@ const WorkoutSettingsScreen = () => {
         <Buttons.MiniButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('workoutTime', 120)} />
       </View>
 
+      <View style={UIStyle.space}/>
+
       <Text style = {UIStyle.subHeaders}>Round Time (minutes):</Text>
       <View style = {UIStyle.gridContainer}>
         <Buttons.MiniButton style = {UIStyle.gridItem} title="-" onPress={() => handleDecrement('roundTime', 0.5)} />
@@ -140,6 +141,8 @@ const WorkoutSettingsScreen = () => {
         <View style={UIStyle.space} />
         <Buttons.MiniButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('roundTime', 5)} />
       </View>
+
+      <View style={UIStyle.space}/>
 
       <Text style = {UIStyle.subHeaders}>Rest Time (seconds):</Text>
       <View style = {UIStyle.gridContainer}>
@@ -155,6 +158,8 @@ const WorkoutSettingsScreen = () => {
         <Buttons.MiniButton style = {UIStyle.gridItem} title="+" onPress={() => handleIncrement('restTime', 120)} />
       </View>
 
+      <View style={UIStyle.space}/>
+
       <Text style = {UIStyle.subHeaders}>Toggle Beginner Combinations: {beginner ? 'ON' : 'OFF'}</Text>
       <Switch 
       value={beginner} 
@@ -162,12 +167,16 @@ const WorkoutSettingsScreen = () => {
       trackColor={{true: '#2E4057', false: '#495867'}}
       thumbColor='#D9CAB3'/>
 
+      <View style={UIStyle.space}/>
+
       <Text style = {UIStyle.subHeaders}>Toggle Advanced Combinations: {advanced ? 'ON' : 'OFF'}</Text>
       <Switch 
       value={advanced} 
       onValueChange={() => handleToggle('advanced')} 
       trackColor={{true: '#2E4057', false: '#495867'}}
       thumbColor='#D9CAB3'/>
+
+      <View style={UIStyle.space}/>
       
       <Text style = {UIStyle.subHeaders}>Toggle User Combinations: {userToggle ? 'ON' : 'OFF'}</Text>
       <Switch 
@@ -176,6 +185,7 @@ const WorkoutSettingsScreen = () => {
       trackColor={{true: '#2E4057', false: '#495867'}}
       thumbColor='#D9CAB3'/>
 
+      <View style={UIStyle.space}/>
 
       <Buttons.StartWorkoutButton
       title="Start Workout" 

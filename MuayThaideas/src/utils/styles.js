@@ -36,54 +36,24 @@ export const UIStyle = StyleSheet.create({
       shadowOffset: { width: 0, height: 5 }, 
     },
 
-    mainButton: {
-        overflow: "visible",
-        width: "80%",
-        paddingVertical: 32,
-        paddingHorizontal: 10,
-        borderRadius: 8,
-        backgroundColor: "#5E0B15",
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#5E0B15',
-        shadowColor: 'rgba(0, 0, 0, 0.1)',
-        shadowOpacity: 0.8,
-        elevation: 6,
-        shadowRadius: 15 ,
-        shadowOffset : { width: 1, height: 13},
+    buttonContainer: {
+      margin: 5,
+      width: "80%",
+      borderRadius: 8,
     },
 
-    mainButtonText: {
-        color: '#D9CAB3',
-        fontSize: 16,
-        fontWeight: 'bold',
+    buttonContent: {
+      backgroundColor: '#495867', 
+      padding: 15,
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
 
-    secondaryButton: {
-        width: "80%",
-        paddingVertical: 32,
-        paddingHorizontal: 10,
-        borderRadius: 8,
-        backgroundColor: '#90323D',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#90323D',
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        elevation: 3,
-    },
-
-    secondaryButtonText: {
-        color: '#D9CAB3',
-        fontSize: 16,
-        fontWeight: 'bold',
+    buttonText: {
+      color: '#D9CAB3r', 
+      fontSize: 16,
+      fontWeight: 'bold',
     },
 
     mainHeaders: {
@@ -120,7 +90,6 @@ export const UIStyle = StyleSheet.create({
       textShadowRadius: 2,
       elevation: 3
     },
-
 
     space:{
         height: 20,

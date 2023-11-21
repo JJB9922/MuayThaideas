@@ -35,18 +35,19 @@ const WorkoutScreen = () => {
     return `${minutes} minutes, ${seconds} seconds`;
   };
 
-  const handleSetComboList = (result) => {
-    let comboList = [];
+  let comboList = [];
   
-    if (result.rows.length > 0) {
-      for (let i = comboList.length; i < result.rows.length; i++) {
-        comboList[i] = result.rows._array[i].combo;
+  const handleSetComboList = (result) => {
+    for (let i = 0; i < result.rows.length; i++) {
+      const combo = result.rows._array[i].combo;
+
+      if (!comboList.includes(combo)) {
+        comboList.push(combo);
       }
     }
+      assignRandomCombo(comboList);
+  };
   
-    assignRandomCombo(comboList);
-  }
-
   useEffect(() => {
     getRandomCombo();
   }, []);
@@ -119,7 +120,7 @@ const WorkoutScreen = () => {
   }, [overallTimeRemaining, navigation]);
 
 
-  assignRandomCombo = (comboList) => {
+  const assignRandomCombo = (comboList) => {
       const rng = RNG(0, comboList.length);
       setRandomCombo(comboList[rng]);
     }
@@ -179,9 +180,9 @@ const WorkoutScreen = () => {
 
   const handleSkip = () => {
     if(isRoundActive){
-      setRoundTimeRemaining(1);
+      setRoundTimeRemaining(0);
     } else {
-      setRestTimeRemaining(1);
+      setRestTimeRemaining(0);
     }
   };
 
@@ -198,10 +199,9 @@ const WorkoutScreen = () => {
   return (
     <View style={homeStyle.container}>
       <View style={UIStyle.space}/>
-      <View style={UIStyle.space}/>
-      <View style={UIStyle.space}/>
       
-      <Text style={UIStyle.subHeaders}>Workout Time Remaining: {formatTime(overallTimeRemaining)} seconds</Text>
+      <Text style={UIStyle.subHeaders}>Workout Time Remaining:</Text>
+      <Text style={UIStyle.subHeaders}>{formatTime(overallTimeRemaining)} seconds</Text>
 
       <View style={UIStyle.space}/>
       <View style={UIStyle.space}/>
@@ -221,14 +221,14 @@ const WorkoutScreen = () => {
       <View style={UIStyle.space}/>
       <View style={UIStyle.space}/>
       <View style={UIStyle.space}/>
-      
+      <View style={UIStyle.space}/>
 
       <Buttons.WorkoutButton title={isWorkoutPaused ? "Resume" : "Pause"} onPress={handlePauseResume} colour1={'#2E4057'} colour2={'#495867'} />
-
+      <View style={UIStyle.space}/>
       <Buttons.WorkoutButton title={isRoundActive ? "Skip Round" : "Skip Rest"} onPress={handleSkip} colour1={'#2E4057'} colour2={'#495867'}/>
-
+      <View style={UIStyle.space}/>
       <Buttons.WorkoutButton title="Extend Rest" onPress={handleExtendRest} colour1={'#2E4057'} colour2={'#495867'}/>
-
+      <View style={UIStyle.space}/>
       <Buttons.WorkoutButton title="Cancel Workout" onPress={handleCancelWorkout}  colour1={'#2E4057'} colour2={'#495867'}/>
     </View>
   );

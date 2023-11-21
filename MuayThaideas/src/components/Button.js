@@ -16,26 +16,13 @@ function MainNavButton(props) {
     };
 
     return (
-        <TouchableOpacity style={UIStyle.mainButton} onPress={handlePress}>
-          <Text style={UIStyle.mainButtonText}>{title}</Text>
-        </TouchableOpacity>
-    );
-}
-
-function SecondaryNavButton(props) {
-  const navigation = useNavigation();
-  const { onPress, screenName, title } = props;
-
-  const handlePress = () => {
-    navigation.navigate(screenName);
-  };
-
-  return (
-    <TouchableOpacity style={UIStyle.secondaryButton} onPress={handlePress}>
-      <Text style={UIStyle.secondaryButtonText}>{title}</Text>
+    <TouchableOpacity onPress={handlePress} style={UIStyle.buttonContainer}>
+        <View style={UIStyle.buttonContent}>
+          <Text style={UIStyle.buttonText}>{title}</Text>
+        </View>
     </TouchableOpacity>
   );
-}
+};
 
 function DeleteButton(props) {
   const { onPress, title } = props;
@@ -135,7 +122,7 @@ function MiniButton({ title, onPress }){
   );
 };
 
- export default { MainNavButton, SecondaryNavButton, DeleteButton, GradientButton, 
+ export default { MainNavButton, DeleteButton, GradientButton, 
                   BasicButton, StartWorkoutButton, MiniButton, SmallGradientButton,
                   WorkoutButton }; 
   

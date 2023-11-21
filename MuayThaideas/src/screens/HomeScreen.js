@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, Image } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { homeStyle, UIStyle } from '../utils/styles';
 import Buttons from '../components/Button';
 
@@ -17,14 +17,13 @@ export default function App() {
   
         <View style = {UIStyle.space}/>
   
-        <Buttons.SecondaryNavButton title = "Combo List" screenName = "ComboList"/>
+        <Buttons.MainNavButton title = "Combo List" screenName = "ComboList"/>
   
         <View style = {UIStyle.space}/>
-  
-        {/* <Buttons.SecondaryNavButton title = "Fighter Details" screenName = "FighterDetails"/> */}
-  
-        <View style = {UIStyle.space}/>
-  
+
+        <View>
+          <Text style={{flex: .2}}>Version 0.2.0 (Beta)</Text>
+        </View>
         <StatusBar style="auto" />
       </View>
     );

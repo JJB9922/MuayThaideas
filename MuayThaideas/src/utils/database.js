@@ -17,10 +17,10 @@ async function openDatabase() {
     );
   }
   await FileSystem.downloadAsync(
-    Asset.fromModule(require("../../assets/builtins.db")).uri,
-    FileSystem.documentDirectory + "SQLite/builtins.db"
+    Asset.fromModule(require("../../assets/builtinCombos.db")).uri,
+    FileSystem.documentDirectory + "SQLite/builtinCombos.db"
   );
-  return SQLite.openDatabase("builtins.db","1.0");
+  return SQLite.openDatabase("builtinCombos.db","1.0");
 }
 
 function GetDefaultComboList(){
