@@ -35,6 +35,21 @@ const WorkoutScreen = () => {
     return `${minutes} minutes, ${seconds} seconds`;
   };
 
+  const handleSetComboList = (result) => {
+    let comboList = [];
+  
+    if (result.rows.length > 0) {
+      for (let i = comboList.length; i < result.rows.length; i++) {
+        comboList[i] = result.rows._array[i].combo;
+      }
+    }
+  
+    assignRandomCombo(comboList);
+  }
+
+  useEffect(() => {
+    getRandomCombo();
+  }, []);
 
   useEffect(() => {
     if (!isWorkoutPaused) {
@@ -48,13 +63,7 @@ const WorkoutScreen = () => {
 
   useEffect(() => {
     if (overallTimeRemaining === 0) {
-      navigation.navigate('WorkoutEndScreen');
-    }
-  }, [overallTimeRemaining, navigation]);
-
-  useEffect(() => {
-    if (overallTimeRemaining === 0) {
-      navigation.navigate('WorkoutEndScreen');
+      navigation.navigate('WorkoutSetup');
     }
   }, [overallTimeRemaining, navigation]);
 
@@ -71,7 +80,6 @@ const WorkoutScreen = () => {
 
   useEffect(() => {
     if (isRoundActive && !isWorkoutPaused) {
-      getRandomCombo();
       const roundTimer = setInterval(() => {
         setRoundTimeRemaining((prev) => (prev > 0 ? prev - 1 : 0));
       }, 1000);
@@ -100,7 +108,7 @@ const WorkoutScreen = () => {
       setIsRoundActive(true);
       setRestTimeRemaining(restTime);
       setRoundTimeRemaining(roundTime * 60);
-      setRandomCombo();
+      getRandomCombo();
     }
   }, [roundTimeRemaining, restTimeRemaining]);
 
@@ -110,13 +118,19 @@ const WorkoutScreen = () => {
     }
   }, [overallTimeRemaining, navigation]);
 
+
+  assignRandomCombo = (comboList) => {
+      const rng = RNG(0, comboList.length);
+      setRandomCombo(comboList[rng]);
+    }
+  
+
   function grabUserCombo(){
     ComboList.grabRandomUserCombo((error, result) => {
       if (error) {
         console.error(error);
       } else {
-        console.log(result)
-        setRandomCombo(result);
+        handleSetComboList(result);
       }
     });
   }
@@ -126,8 +140,7 @@ const WorkoutScreen = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(result)
-        setRandomCombo(result);
+        handleSetComboList(result);
       }
     });
   }
@@ -137,54 +150,22 @@ const WorkoutScreen = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(result)
-        setRandomCombo(result);
+        handleSetComboList(result);
       }
     });
   }
 
   function getRandomCombo(){ 
-    //if you see this, I am very tired and my brain won't think of a better way
-    if(beginner && !advanced && !userToggle){
+    if(beginner){
       grabBuiltinBeginnerCombo();
-    } else if (advanced && !beginner && !userToggle) {
+    }
+
+    if(advanced){
       grabBuiltinAdvancedCombo();
-    } else if (userToggle && !beginner && !advanced){
+    }
+
+    if(userToggle){
       grabUserCombo();
-    } else if (beginner && advanced && !userToggle){
-      if(RNG(0, 1) === 0){
-        grabBuiltinBeginnerCombo();
-      } else if (RNG(0, 1) === 1){
-        grabBuiltinAdvancedCombo();
-      }
-    } else if (!beginner && advanced && userToggle){
-      if(RNG(0, 1) === 0){
-        grabUserCombo();
-      } else if (RNG(0, 1) === 1){
-        grabBuiltinAdvancedCombo();
-      }
-    } else if (beginner && advanced && userToggle){
-      if(RNG(0, 1) === 0){
-        grabBuiltinBeginnerCombo();
-      } else if (RNG(0, 1) === 1){
-        grabBuiltinAdvancedCombo();
-      } else if (RNG(0, 1) === 2){
-        grabUserCombo();
-      }
-    } else if (beginner && !advanced && userToggle){
-      if(RNG(0, 1) === 0){
-        grabBuiltinBeginnerCombo();
-      } else if (RNG(0, 1) === 1){
-        grabUserCombo();
-      }
-    } else if (beginner && advanced && userToggle) {
-      if(RNG(0,2) === 0){
-        grabBuiltinAdvancedCombo();
-      } else if (RNG(0,2) == 1){
-        grabBuiltinBeginnerCombo();
-      } else if (RNG(0,2) == 2){
-        grabUserCombo();
-      }
     }
   }
 
@@ -198,12 +179,9 @@ const WorkoutScreen = () => {
 
   const handleSkip = () => {
     if(isRoundActive){
-      setIsRoundActive(false);
-      setRoundTimeRemaining(roundTime * 60);
-      setRandomCombo(null)
+      setRoundTimeRemaining(1);
     } else {
-      setIsRoundActive(true);
-      setRestTimeRemaining(restTime);
+      setRestTimeRemaining(1);
     }
   };
 

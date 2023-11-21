@@ -297,25 +297,8 @@ function grabRandomUserCombo(callback) {
         'SELECT * FROM combos',
         null,
         (_, resultSet) => {
-          // Check if there is at least one row
-          console.log(resultSet.rows.length)
           if (resultSet.rows.length > 0) {
-            const randomCombo = resultSet
-              .rows
-                .item(Math
-                  .floor(Math
-                    .random() * ((resultSet.rows.length-1) - 0 + 1)) + 0)
-                      .combo;        
-            callback(null, randomCombo);
-          } else {
-              Alert.alert('No User Combos Found', 'Please create combos in the Combo List, or select the builtin combo categories.', [
-                {
-                  text: 'OK',
-                  onPress: () => {
-                    callback('No combos found');
-                  },
-                },
-              ]);
+            callback(null, resultSet);
           }
         },
         (_, error) => callback(error)
@@ -339,14 +322,8 @@ function grabRandomBuiltinBeginnerCombo(callback) {
         (_, resultSet) => {
           // Check if there is at least one row
           console.log(resultSet.rows.length)
-          if (resultSet.rows.length > 0) {
-            const randomCombo = resultSet
-              .rows
-                .item(Math
-                  .floor(Math
-                    .random() * ((resultSet.rows.length-1) - 0 + 1)) + 0)
-                      .combo;        
-            callback(null, randomCombo);
+          if (resultSet.rows.length > 0) {   
+            callback(null, resultSet);
           } else {
             callback('No combos found');
           }
@@ -371,14 +348,8 @@ function grabRandomBuiltinAdvancedCombo(callback) {
         (_, resultSet) => {
 
           console.log(resultSet.rows.length)
-          if (resultSet.rows.length > 0) {
-            const randomCombo = resultSet
-              .rows
-                .item(Math
-                  .floor(Math
-                    .random() * ((resultSet.rows.length-1) - 0 + 1)) + 0)
-                      .combo;        
-            callback(null, randomCombo);
+          if (resultSet.rows.length > 0) {    
+            callback(null, resultSet);
           } else {
             callback('No combos found');
           }
