@@ -86,10 +86,8 @@ I tried to make the UI as minimalist and as intuitive as possible: so here are s
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-* If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/JJB9922/MuayThaideas/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
-* Please make sure you check your spelling and grammar.
+* If you have suggestions for adding or removing features, feel free to [open an issue](https://github.com/JJB9922/MuayThaideas/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
 * Create individual PR for each suggestion.
-* Please also read through the [Code Of Conduct](https://github.com/JJB9922/MuayThaideas/blob/main/CODE_OF_CONDUCT.md) before posting your first idea as well.
 
 ### Creating A Pull Request
 
